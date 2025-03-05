@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  phone           String    @unique
+  password        String
+  collegeId       String    @unique
+  collegePassword String
+  registeredAt    DateTime  @default(now())
+  lastLogin       DateTime?
+  isActive        Boolean   @default(true)
+
+  notifications     Notification[]
+  attendanceRecords Attendance[]
+}
+
+model Attendance {
+  id         String           @id @default(cuid())
+  studentId  String
+  date       DateTime
+  status     AttendanceStatus
+  percentage Float
+
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  studentId String
+  type      NotificationType
+  message   String
+  sentAt    DateTime         @default(now())
+  isRead    Boolean          @default(false)
+
+  student Student @relation(fields: [studentId], references: [id])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  HALFDAY
+  LEAVE
+}
+
+enum NotificationType {
+  WHATSAPP
+  EMAIL
+  PUSH
+}

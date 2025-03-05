@@ -12,10 +12,10 @@ Present Monitor is a web-based service designed to automate the process of check
 - **Secure Data Handling**: Ensures the security of user credentials and attendance data.
 ## Technology Stack
 - **Frontend**: Next.js
-- **Backend**: Node.js
+- **Backend**: Express JS
 - **Database**: PostgreSQL
 ## Setup and Installation
-1. **Clone the repository**:git clone https://github.com/VyomOp2/Present-Monitor.git
+1. **Clone the repository**:git clone https://github.com/VyomJain6904/Present-Monitor.git
 cd Present-Monitor
 2. **Install dependencies**:npm install
 3. **Set up the database**:
